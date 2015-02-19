@@ -26,7 +26,8 @@ import com.vdenotaris.spring.boot.security.saml.web.stereotypes.CurrentUser;
 @Controller
 public class LandingController {
 
-	@RequestMapping("/landing")
+	@SuppressWarnings( "SpringMVCViewInspection" )
+    @RequestMapping("/landing")
 	public String landing(@CurrentUser User user, Model model) {
 		model.addAttribute("username", 	user.getUsername());
 		return "landing";

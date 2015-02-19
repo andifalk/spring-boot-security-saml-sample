@@ -42,7 +42,8 @@ public class SSOController {
 	@Autowired
 	private MetadataManager metadata;
 
-	@RequestMapping(value = "/idpSelection", method = RequestMethod.GET)
+	@SuppressWarnings( "SpringMVCViewInspection" )
+    @RequestMapping(value = "/idpSelection", method = RequestMethod.GET)
 	public String idpSelection(HttpServletRequest request, Model model) {
 		if (!(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken)) {
 			LOG.warn("The current user is already logged.");
@@ -65,10 +66,7 @@ public class SSOController {
 	 * Checks if an HTTP request is forwarded from servlet.
 	 */
 	private boolean isForwarded(HttpServletRequest request){
-		if (request.getAttribute("javax.servlet.forward.request_uri") == null)
-			return false;
-		else
-			return true;
+        return request.getAttribute ( "javax.servlet.forward.request_uri" ) != null;
 	}
 
 }

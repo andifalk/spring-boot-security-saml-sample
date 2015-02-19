@@ -45,7 +45,7 @@ public class SAMLUserDetailsServiceImpl implements SAMLUserDetailsService {
 		String userID = credential.getNameID().getValue();
 		
 		LOG.info(userID + " is logged in");
-		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		List<GrantedAuthority> authorities = new ArrayList<> ();
 		GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_USER");
 		authorities.add(authority);
 

@@ -205,7 +205,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         Resource storeFile = loader
                 .getResource("classpath:/saml/samlKeystore.jks");
         String storePass = "nalle123";
-        Map<String, String> passwords = new HashMap<String, String>();
+        Map<String, String> passwords = new HashMap<> ();
         passwords.put("apollo", "nalle123");
         String defaultKey = "apollo";
         return new JKSKeyManager(storeFile, storePass, passwords, defaultKey);
@@ -291,7 +291,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     @Qualifier("metadata")
     public CachingMetadataManager metadata() throws MetadataProviderException {
-        List<MetadataProvider> providers = new ArrayList<MetadataProvider>();
+        List<MetadataProvider> providers = new ArrayList<> ();
         providers.add(ssoCircleExtendedMetadataProvider());
         return new CachingMetadataManager(providers);
     }
@@ -434,7 +434,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     // Processor
 	@Bean
 	public SAMLProcessorImpl processor() {
-		Collection<SAMLBinding> bindings = new ArrayList<SAMLBinding>();
+		Collection<SAMLBinding> bindings = new ArrayList<> ();
 		bindings.add(httpRedirectDeflateBinding());
 		bindings.add(httpPostBinding());
 		bindings.add(artifactBinding(parserPool(), velocityEngine()));
@@ -451,7 +451,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
     @Bean
     public FilterChainProxy samlFilter() throws Exception {
-        List<SecurityFilterChain> chains = new ArrayList<SecurityFilterChain>();
+        List<SecurityFilterChain> chains = new ArrayList<> ();
         chains.add(new DefaultSecurityFilterChain(new AntPathRequestMatcher("/saml/login/**"),
                 samlEntryPoint()));
         chains.add(new DefaultSecurityFilterChain(new AntPathRequestMatcher("/saml/logout/**"),
